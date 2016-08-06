@@ -26,7 +26,8 @@ mktempdir() do dir
             try
                 repo_path = joinpath(dir, "Example2")
                 # credentials are required because github tries to authenticate on unknown repo
-                cred = LibGit2.UserPasswordCredentials("","") # empty credentials cause authentication error
+                # Use `blog` username since we know that'll never be a real user.
+                cred = LibGit2.UserPasswordCredentials("blog","nottryingtologinjusttestingerrorcase")
                 LibGit2.clone(https_prefix*repo_url*randstring(10), repo_path, payload=Nullable(cred))
                 error("unexpected")
             catch ex
